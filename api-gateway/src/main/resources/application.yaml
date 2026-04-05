@@ -1,0 +1,14 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    config:
+      enabled: false  # <-- tell Spring Cloud not to look for config server
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
