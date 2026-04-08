@@ -1,11 +1,11 @@
-package lk.ijse.zoneservice;
+package lk.ijse.cropservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ZoneServiceApplication {
+public class CropServiceApplication {
     public static void main(String[] args) {
-        SpringApplication.run(ZoneServiceApplication.class, args);
+        SpringApplication.run(CropServiceApplication.class, args);
     }
 }
