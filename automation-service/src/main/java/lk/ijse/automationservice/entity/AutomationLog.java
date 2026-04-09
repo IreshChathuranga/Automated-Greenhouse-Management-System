@@ -11,7 +11,6 @@ import java.time.Instant;
 public class AutomationLog {
     @Id
     private String id;
-
     private String zoneId;
     private String deviceId;
     private double temperature;

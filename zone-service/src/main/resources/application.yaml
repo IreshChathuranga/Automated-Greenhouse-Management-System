@@ -1,5 +1,5 @@
 server:
-  port: 8081
+  port: 8085
 
 spring:
   application:
@@ -18,3 +18,10 @@ spring:
 
   config:
     import: optional:configserver:http://localhost:8888
+
+external:
+  iot:
+    base-url: "http://104.211.95.241:8080/api"
+    user:
+      username: "myuser"
+      password: "123456"

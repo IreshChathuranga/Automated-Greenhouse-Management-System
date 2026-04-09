@@ -4,3 +4,25 @@ spring:
 
   config:
     import: optional:configserver:http://localhost:8888
+
+  cloud:
+    openfeign:
+      client:
+        config:
+          iotClient:
+            connectTimeout: 5000
+            readTimeout: 8000
+
+external:
+  iot:
+    base-url: "http://104.211.95.241:8080/api"
+    user:
+      username: "myuser"
+      password: "123456"
+    device-id: "b751b8c9-644a-484c-ba3f-be63f9b27ad0"
+
+sensor:
+  scheduler:
+    fixed-delay-ms: 10000
+    initial-delay-ms: 5000
+    login-cooldown-ms: 30000

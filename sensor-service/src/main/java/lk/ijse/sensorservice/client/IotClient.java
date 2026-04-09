@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 @FeignClient(name = "iotClient", url = "${external.iot.base-url}")
 public interface IotClient {
     @PostMapping("/auth/login")
-    AuthResponse login(AuthRequest req);
+    AuthResponse login(@RequestBody AuthRequest req);
 
     @GetMapping("/devices/telemetry/{deviceId}")
     TelemetryDTO getTelemetry(@RequestHeader("Authorization") String bearer, @PathVariable String deviceId);

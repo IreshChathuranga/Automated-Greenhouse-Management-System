@@ -1,10 +1,8 @@
 package lk.ijse.cropservice.entity;
 import jakarta.persistence.*;
-import lombok.Data;
 
 import java.time.Instant;
 
-@Data
 @Entity
 public class CropBatch {
     @Id
@@ -17,4 +15,44 @@ public class CropBatch {
     private CropStatus status;
 
     private Instant createdAt;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getCropName() {
+        return cropName;
+    }
+
+    public void setCropName(String cropName) {
+        this.cropName = cropName;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public CropStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(CropStatus status) {
+        this.status = status;
+    }
+
+    public Instant getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Instant createdAt) {
+        this.createdAt = createdAt;
+    }
 }

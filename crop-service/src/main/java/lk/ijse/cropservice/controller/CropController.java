@@ -4,7 +4,6 @@ import lk.ijse.cropservice.dto.StatusUpdateRequest;
 import lk.ijse.cropservice.entity.CropBatch;
 import lk.ijse.cropservice.entity.CropStatus;
 import lk.ijse.cropservice.repo.CropRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.Instant;
@@ -13,9 +12,12 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/crops")
-@RequiredArgsConstructor
 public class CropController {
     private final CropRepository repo;
+
+    public CropController(CropRepository repo) {
+        this.repo = repo;
+    }
 
     @PostMapping
     public CropBatch create(@RequestBody CropCreateRequest req) {
