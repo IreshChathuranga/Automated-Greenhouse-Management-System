@@ -10,7 +10,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 
-public class GatewayJwtFilter extends OncePerRequestFilter{
+public class GatewayJwtFilter extends OncePerRequestFilter {
     private final JwtUtil jwtUtil;
 
     public GatewayJwtFilter(JwtUtil jwtUtil) {
@@ -19,11 +19,11 @@ public class GatewayJwtFilter extends OncePerRequestFilter{
 
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) {
-        // allow unauthenticated paths if you have any public endpoints
         String path = request.getRequestURI();
         return path.startsWith("/actuator")
                 || path.startsWith("/swagger")
-                || path.startsWith("/v3/api-docs");
+                || path.startsWith("/v3/api-docs")
+                || path.startsWith("/api/auth/"); // login/register must be public
     }
 
     @Override
@@ -36,13 +36,15 @@ public class GatewayJwtFilter extends OncePerRequestFilter{
         String auth = request.getHeader(HttpHeaders.AUTHORIZATION);
 
         if (auth == null || !auth.startsWith("Bearer ")) {
-            response.setStatus(HttpStatus.UNAUTHORIZED.value());
+            response.setHeader(HttpHeaders.WWW_AUTHENTICATE, "Bearer");
+            response.sendError(HttpStatus.UNAUTHORIZED.value(), "Missing or invalid Authorization header");
             return;
         }
 
         String token = auth.substring(7);
         if (!jwtUtil.isValid(token)) {
-            response.setStatus(HttpStatus.UNAUTHORIZED.value());
+            response.setHeader(HttpHeaders.WWW_AUTHENTICATE, "Bearer error=\"invalid_token\"");
+            response.sendError(HttpStatus.UNAUTHORIZED.value(), "Invalid or expired token");
             return;
         }
 

@@ -6,6 +6,30 @@ spring:
     name: api-gateway
   config:
     import: "optional:configserver:http://localhost:8888"
+  cloud:
+    gateway:
+      mvc:
+        routes:
+          - id: external-auth
+            uri: http://104.211.95.241:8080
+            predicates:
+              - Path=/api/auth/**
+          - id: zone-service
+            uri: lb://ZONE-SERVICE
+            predicates:
+              - Path=/api/zones/**
+          - id: sensor-service
+            uri: lb://SENSOR-SERVICE
+            predicates:
+              - Path=/api/sensors/**
+          - id: automation-service
+            uri: lb://AUTOMATION-SERVICE
+            predicates:
+              - Path=/api/automation/**
+          - id: crop-service
+            uri: lb://CROP-SERVICE
+            predicates:
+              - Path=/api/crops/**
 
 eureka:
   client:
